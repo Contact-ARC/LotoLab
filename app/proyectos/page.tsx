@@ -5,7 +5,9 @@ import { RoundArrow } from "@/components/round-arrow";
 import { ProjectGallery, type GalleryProject } from "@/components/project-gallery";
 import { SecondaryHeader } from "@/components/secondary-header";
 
-const asset = (folder: string, file: string) => `/projects-all/${folder}/${encodeURIComponent(file)}`;
+const slug = (file: string) =>
+  file.replace(/\.[^.]+$/, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+const asset = (folder: string, file: string) => `/projects-web/${folder}/${slug(file)}.webp`;
 
 const sourceProjects: GalleryProject[] = [
   {
