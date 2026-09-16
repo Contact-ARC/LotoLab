@@ -1,0 +1,17 @@
+# lotolab/.htaccess — scoped to THIS site's docroot only.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^ https://thelotolab.es%{REQUEST_URI} [L,R=301]
+    RewriteCond %{HTTP_HOST} ^www\.thelotolab\.es$ [NC]
+    RewriteRule ^ https://thelotolab.es%{REQUEST_URI} [L,R=301]
+</IfModule>
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "DENY"
+</IfModule>
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>

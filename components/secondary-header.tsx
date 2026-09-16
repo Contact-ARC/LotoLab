@@ -1,3 +1,5 @@
+import { MobileMenu } from "@/components/mobile-menu";
+
 type SecondaryHeaderProps = {
   current?: "proyectos" | "estudio" | "servicios" | "contacto";
   negative?: boolean;
@@ -19,7 +21,7 @@ export function SecondaryHeader({ current, negative = false }: SecondaryHeaderPr
           <a href="/estudio" aria-current={current === "estudio" ? "page" : undefined}>Estudio</a>
           <a href="/servicios" aria-current={current === "servicios" ? "page" : undefined}>Servicios</a>
           <a href="/contacto" aria-current={current === "contacto" ? "page" : undefined}>Contacto</a>
-          <span className="mobile-menu-label">Menú</span>
+          <MobileMenu negative={negative} />
         </nav>
       </header>
     </>

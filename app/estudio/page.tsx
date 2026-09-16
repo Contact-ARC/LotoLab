@@ -11,6 +11,7 @@ const people = [
     name: "Andrea Torres Íñiguez",
     profession: "Arquitecta y artista",
     className: "is-andrea",
+    image: "/andrea.webp",
     paragraphs: [
       "Arquitecta y graduada en Bellas Artes, combina sensibilidad estética, rigor técnico y una especial atención a la materialidad y al detalle.",
       "Ha trabajado en estudios como A-cero y en proyectos de arquitectura corporativa, residencial de alta gama, construcción y dirección de obra, coordinando equipos y procesos desde el proyecto hasta la ejecución.",
@@ -24,6 +25,7 @@ const people = [
     name: "Jesús López de los Mozos",
     profession: "Arquitecto y diseñador industrial",
     className: "is-jesus",
+    image: "/jesus.webp",
     paragraphs: [
       "Formado en arquitectura, diseño industrial y fabricación digital, combina una mirada creativa y estratégica con una fuerte base técnica.",
       "Su trayectoria cruza diseño, arquitectura, docencia y eficiencia energética, con experiencia en universidades como UDIT, UEM e IED y en labores de coordinación académica.",
@@ -70,9 +72,9 @@ export default function StudioPage() {
       <div className="studio-people">
         {people.map((person) => (
           <section className={`studio-person ${person.className}`} key={person.number}>
-            {/* Sustituir este placeholder por la fotografía de la persona manteniendo la clase studio-portrait. */}
-            <div className="studio-portrait" role="img" aria-label={`Fotografía de ${person.name}, pendiente`} data-studio-reveal>
-              <span>Fotografía pendiente</span>
+            {/* Fotografía de la persona; mantiene la clase studio-portrait. */}
+            <div className="studio-portrait" data-studio-reveal>
+              <img src={person.image} alt={`Fotografía de ${person.name}`} loading="lazy" />
             </div>
             <div className="studio-person-copy" data-studio-reveal>
               <span className="studio-person-number">{person.number} · {person.shortName}</span>

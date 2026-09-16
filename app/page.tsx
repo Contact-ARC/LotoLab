@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { RoundArrow } from "@/components/round-arrow";
 import { ProjectGallery } from "@/components/project-gallery";
+import { MobileMenu } from "@/components/mobile-menu";
 
 type SpringPiece = {
   element: SVGGraphicsElement;
@@ -525,6 +526,10 @@ function ScaleStory({ onOpenProject }: { onOpenProject: (project: ProjectKey) =>
     };
     drawing.setAttribute("aria-busy", "false");
     video.addEventListener("error", prepareFallback);
+    const isIOS = /iP(hone|od|ad)/.test(navigator.userAgent) ||
+      (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent));
+    if (isIOS) prepareFallback();
+
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate);
 
@@ -858,7 +863,7 @@ export default function Home() {
           <a href="/estudio">Estudio</a>
           <a href="/servicios">Servicios</a>
           <a href="/contacto">Contacto</a>
-          <span className="mobile-menu-label">Menú</span>
+          <MobileMenu />
         </nav>
       </header>
 

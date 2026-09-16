@@ -2383,7 +2383,7 @@ button { font: inherit; }
   .archive-heading > span { display: block; padding: 0 0 1.4rem; }
 
   .archive-heading h1 {
-    font-size: clamp(4rem, 21vw, 7rem);
+    font-size: clamp(3rem, 14vw, 6rem);
     line-height: 0.86;
   }
 
@@ -2768,4 +2768,86 @@ button { font: inherit; }
   .drawing-vector,
   .drawing-grain,
   .drawing-caption { display: none; }
+}
+
+/* --- Mobile navigation menu --------------------------------------- */
+.menu-toggle {
+  display: none;
+  padding: 0.5rem 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  padding: var(--page-pad);
+  background: var(--loto-warm);
+  color: var(--loto-red);
+  animation: mobile-menu-in 220ms ease both;
+}
+
+.mobile-menu.is-negative { background: var(--loto-red); color: var(--loto-warm); }
+.mobile-menu[hidden] { display: none; }
+
+.mobile-menu-close {
+  align-self: flex-end;
+  margin-top: clamp(1rem, 1.8vw, 1.65rem);
+  padding: 0.4rem 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.mobile-menu-nav {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1rem, 3.5vh, 2.25rem);
+}
+
+.mobile-menu-nav a {
+  width: fit-content;
+  font-size: clamp(2.5rem, 12vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+@keyframes mobile-menu-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 700px) {
+  .menu-toggle { display: inline-flex; }
+}
+
+/* Mobile menu — guarantee visible links */
+.mobile-menu { min-height: 100svh; }
+.mobile-menu:not(.is-negative) { color: var(--loto-red); background: var(--loto-warm); }
+.mobile-menu:not(.is-negative) .mobile-menu-close { color: var(--loto-ink); }
+.mobile-menu.is-negative { color: var(--loto-warm); background: var(--loto-red); }
+.mobile-menu-nav { min-height: 0; }
+.mobile-menu-nav a {
+  display: block;
+  color: inherit;
+  opacity: 1;
+  visibility: visible;
 }

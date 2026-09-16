@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { RoundArrow } from "@/components/round-arrow";
+import { ContactForm } from "@/components/contact-form";
 import { SecondaryHeader } from "@/components/secondary-header";
 
 export const metadata: Metadata = {
@@ -20,32 +20,7 @@ export default function ContactPage() {
       </section>
 
       <section className="contact-content contact-reveal" aria-label="Formulario y datos de contacto">
-        <form className="contact-form" action="mailto:estudio@thelotolab.es" method="post" encType="text/plain">
-          <label>
-            <span>Nombre</span>
-            <input name="nombre" type="text" autoComplete="name" required />
-          </label>
-          <label>
-            <span>Email</span>
-            <input name="email" type="email" autoComplete="email" required />
-          </label>
-          <label className="contact-message">
-            <span>¿Qué tienes en mente?</span>
-            <textarea name="mensaje" rows={3} required />
-          </label>
-          <label className="contact-select">
-            <span>Tipo de conversación</span>
-            <select name="tipo" defaultValue="Proyecto">
-              <option>Proyecto</option>
-              <option>Colaboración</option>
-              <option>Una idea</option>
-            </select>
-          </label>
-          <button className="contact-submit" type="submit">
-            <span>Empezamos</span>
-            <RoundArrow className="contact-submit-arrow" />
-          </button>
-        </form>
+        <ContactForm />
 
         <aside className="contact-details">
           <div>
