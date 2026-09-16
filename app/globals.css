@@ -1646,6 +1646,15 @@ button { font: inherit; }
   opacity: 0.62;
 }
 
+.studio-portrait img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .studio-person-copy { grid-column: 8 / -1; }
 
 .studio-person.is-jesus .studio-portrait { grid-column: 8 / -1; }
