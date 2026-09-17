@@ -481,7 +481,7 @@ button { font: inherit; }
   height: 100%;
   mix-blend-mode: normal;
   opacity: var(--line-opacity);
-  filter: drop-shadow(0 0 0.55px rgba(237, 69, 37, 0.7));
+  filter: none;
   will-change: opacity;
   pointer-events: none;
 }

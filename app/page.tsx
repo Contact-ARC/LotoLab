@@ -454,8 +454,8 @@ function ScaleStory({ onOpenProject }: { onOpenProject: (project: ProjectKey) =>
 
       paths = measured.map(({ element, length }, index) => {
         element.style.fill = "none";
-        element.style.stroke = "#ed4525";
-        element.style.strokeWidth = "1.65";
+        element.style.stroke = "#33302b";
+        element.style.strokeWidth = "2.6";
         element.style.strokeLinecap = "round";
         element.style.strokeLinejoin = "round";
         element.style.strokeDasharray = String(length);
@@ -481,9 +481,9 @@ function ScaleStory({ onOpenProject }: { onOpenProject: (project: ProjectKey) =>
       const mobile = window.innerWidth <= 700;
       const expandedScale = (mobile ? 0.86 : 0.64) + frameProgress * (mobile ? 0.14 : 0.36);
       const frameScale = expandedScale * (1 - handoffProgress * (mobile ? 0.14 : 0.34));
-      const emptyIn = smoothstep(0.02, 0.2, progress);
-      const finalOpacity = smoothstep(0.5, 0.91, progress);
-      lineOpacity = 1 - smoothstep(0.69, 0.91, progress);
+      const emptyIn = smoothstep(0.32, 0.55, progress);
+      const finalOpacity = smoothstep(0.55, 0.78, progress);
+      lineOpacity = 1 - smoothstep(0.56, 0.72, progress);
       lastDrawingProgress = drawingProgress;
       stage.style.setProperty("--drawing-progress", drawingProgress.toFixed(4));
       stage.style.setProperty("--frame-scale", frameScale.toFixed(4));
