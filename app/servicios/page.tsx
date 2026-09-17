@@ -67,6 +67,15 @@ export default function ServicesPage() {
     return () => observer.disconnect();
   }, []);
 
+  const scrollToFamily = (num: string) => {
+    const el = document.getElementById(`familia-${num}`);
+    if (!el) return;
+    const header = document.querySelector(".site-header");
+    const offset = (header ? header.getBoundingClientRect().height : 90) + 16;
+    const y = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
   return (
     <main className="services-page">
       <SecondaryHeader current="servicios" />
@@ -80,7 +89,15 @@ export default function ServicesPage() {
       <nav className="services-family-nav" aria-label="Familias de servicios" data-service-reveal>
         <span className="services-family-line" aria-hidden="true" />
         {families.map((family) => (
-          <a href={`#familia-${family.number}`} key={family.number}>
+          
+          <a
+            key={family.number}
+            role="button"
+            tabIndex={0}
+            style={{ cursor: "pointer" }}
+            onClick={() => scrollToFamily(family.number)}
+            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); scrollToFamily(family.number); } }}
+          >
             <span>{family.number}</span>
             <strong>{family.title}</strong>
           </a>

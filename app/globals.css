@@ -1223,7 +1223,15 @@ button { font: inherit; }
 }
 
 .contact-form textarea { resize: vertical; }
-.contact-form select { appearance: none; cursor: pointer; }
+.contact-form select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2716%27 height=%2716%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23f3f0e8%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M6 9l6 6 6-6%27/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.1rem center;
+  background-size: 1.05rem;
+  padding-right: 1.7rem;
+}
 .contact-form select option { color: var(--loto-ink); }
 
 .contact-form input:focus,
@@ -1341,7 +1349,6 @@ button { font: inherit; }
 .services-page {
   min-height: 100%;
   padding: clamp(5.85rem, 8.25vw, 7.65rem) var(--page-pad) clamp(4rem, 7vw, 8rem);
-  overflow: hidden;
   background: var(--loto-warm);
   color: var(--loto-ink);
 }
@@ -2316,15 +2323,14 @@ button { font: inherit; }
   }
 
   .services-family-nav {
-    grid-template-columns: repeat(4, minmax(11rem, 1fr));
-    margin-right: calc(var(--page-pad) * -1);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 1rem;
     margin-bottom: 4.5rem;
-    overflow-x: auto;
-    scrollbar-width: none;
   }
 
   .services-family-nav::-webkit-scrollbar { display: none; }
-  .services-family-nav a { min-height: 6.5rem; }
+  .services-family-nav a { min-height: 5rem; }
+  .services-family-line { display: none; }
 
   .services-families { gap: 5rem; }
 
