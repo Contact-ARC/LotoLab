@@ -62,7 +62,7 @@ export default function StudioPage() {
 
       <header className="studio-intro" data-studio-reveal>
         <span>Estudio</span>
-        <h1>Las personas detrás del estudio.</h1>
+        <h1>Las personas detrás del estudio</h1>
         <div className="studio-intro-copy">
           <p>The Loto Lab nace de la unión entre arquitectura, diseño y arte. Un estudio donde técnica y creatividad conviven para dar forma a espacios con identidad, intención y carácter.</p>
           <p>Detrás están Jesús López de los Mozos y Andrea Torres Íñiguez, dos perfiles complementarios que entienden la arquitectura no solo como construcción, sino como una herramienta capaz de transformar la forma en que las personas viven, trabajan y se relacionan con los espacios.</p>

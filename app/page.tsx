@@ -677,7 +677,7 @@ function SelectedProjects({ onOpenProject }: { onOpenProject: (project: ProjectK
       </div>
 
       <footer className="projects-foot" data-reveal>
-        <p>Espacios que nacen del contexto y terminan formando parte de la memoria.</p>
+        <p>Espacios que nacen del contexto y terminan formando parte de la memoria</p>
         <a href="/proyectos">Explorar proyectos <b aria-hidden="true">→</b></a>
       </footer>
     </section>
@@ -734,7 +734,7 @@ function WhatWeDo() {
         <header className="process-heading">
           <span>03</span>
           <h2 id="process-title">Qué hacemos</h2>
-          <p>De la primera intuición al espacio construido.</p>
+          <p>De la primera intuición al espacio construido</p>
         </header>
 
         <div className="process-diagram">
@@ -887,7 +887,7 @@ export default function Home() {
 
         <div className="opening-content">
           <p className="opening-kicker">Arquitectura · Interiorismo · Diseño</p>
-          <h1>Creamos espacios que cuentan historias.</h1>
+          <h1>Creamos espacios que cuentan historias</h1>
           <div className="opening-foot">
             <p>Imaginamos y construimos lugares con identidad.</p>
             <a href="/proyectos">

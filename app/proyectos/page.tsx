@@ -168,7 +168,7 @@ export default function ProjectsPage() {
       <header className="archive-heading">
         <span>Archivo</span>
         <h1>Proyectos</h1>
-        <p>Espacios construidos desde la identidad, el contexto y el detalle.</p>
+        <p>Espacios construidos desde la identidad, el contexto y el detalle</p>
       </header>
 
       <section className="archive-grid" aria-label="Todos los proyectos">

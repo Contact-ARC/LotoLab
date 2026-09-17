@@ -82,7 +82,7 @@ export default function ServicesPage() {
 
       <header className="services-intro" data-service-reveal>
         <span>Servicios</span>
-        <h1>De la primera intuición al espacio construido.</h1>
+        <h1>De la primera intuición al espacio construido</h1>
         <p>Trabajamos en proyectos por toda España, adaptándonos a cada contexto, escala y fase del proceso.</p>
       </header>
 

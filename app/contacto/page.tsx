@@ -13,7 +13,7 @@ export default function ContactPage() {
       <SecondaryHeader current="contacto" negative />
 
       <section className="contact-intro contact-reveal" aria-labelledby="contact-title">
-        <h1 id="contact-title">Cuéntanos qué tienes entre manos.</h1>
+        <h1 id="contact-title">Cuéntanos qué tienes entre manos</h1>
         <div className="contact-intro-copy">
           <p>Una idea, un local, una reforma, una intuición o algo que todavía no sabes cómo llamar. Empecemos por ahí.</p>
         </div>
