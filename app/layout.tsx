@@ -32,8 +32,7 @@ export const metadata: Metadata = {
     description: "Estudio de arquitectura e interiorismo en Madrid.",
     images: ["/og.png"],
   },
-  // After Search Console -> "HTML tag" verification, paste the token and redeploy:
-  // verification: { google: "PASTE_TOKEN_HERE" },
+  verification: { google: "ryCA3nYo1b-GXpiHfZ24RF4iBDu3yQXWYZcif6bnhD4" },
 };
 
 export default function RootLayout({
