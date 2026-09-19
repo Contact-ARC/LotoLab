@@ -39,7 +39,7 @@ button { font: inherit; }
   z-index: 2;
   min-height: 100svh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr auto;
   overflow: hidden;
   padding: var(--page-pad);
   background: var(--loto-warm);
@@ -141,7 +141,7 @@ button { font: inherit; }
   transition: opacity 80ms linear, transform 90ms ease-out;
 }
 
-.intro-controls { align-items: flex-end; }
+.intro-controls { align-items: flex-end; justify-content: flex-end; }
 
 .intro-controls p {
   margin: 0;

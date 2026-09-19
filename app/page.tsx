@@ -868,17 +868,11 @@ export default function Home() {
       </header>
 
       <section className="opening" aria-label="Presentación de The Loto Lab">
-        <header className="intro-meta" aria-label="Información de la escena">
-          <span>The Loto Lab</span>
-          <span>Ensayo de cargas · 04</span>
-        </header>
-
         <section className="intro-scene" key={cycle}>
           <LoadTestFour />
         </section>
 
         <footer className="intro-controls">
-          <p>Cuatro direcciones. Un equilibrio.</p>
           <button type="button" onClick={replay}>
             Repetir ensayo
             <span aria-hidden="true">↻</span>

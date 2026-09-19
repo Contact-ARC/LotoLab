@@ -67,7 +67,15 @@ export const metadata: Metadata = {
   applicationName: "The Loto Lab",
   keywords: ["The Loto Lab", "LotoLab", "Loto Lab", "arquitectura", "interiorismo", "diseño", "reformas", "Madrid", "Getafe"],
   alternates: { canonical: "/" },
-  icons: { icon: "/brand/isologo.svg", shortcut: "/brand/isologo.svg" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "es_ES",
