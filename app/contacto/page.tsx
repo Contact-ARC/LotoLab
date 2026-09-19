@@ -3,8 +3,10 @@ import { ContactForm } from "@/components/contact-form";
 import { SecondaryHeader } from "@/components/secondary-header";
 
 export const metadata: Metadata = {
-  title: "Contacto — The Loto Lab",
-  description: "Cuéntanos qué tienes entre manos. Hablemos de tu próximo proyecto.",
+  title: "Contacto",
+  description:
+    "Cuéntanos qué tienes entre manos. Hablemos de tu próximo proyecto con The Loto Lab.",
+  alternates: { canonical: "/contacto" },
 };
 
 export default function ContactPage() {
