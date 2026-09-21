@@ -1664,8 +1664,8 @@ button { font: inherit; }
 
 .studio-person-copy { grid-column: 8 / -1; }
 
-.studio-person.is-jesus .studio-portrait { grid-column: 8 / -1; }
-.studio-person.is-jesus .studio-person-copy { grid-column: 1 / span 6; grid-row: 1; }
+.studio-person.is-jesus .studio-portrait { grid-column: 7 / -1; }
+.studio-person.is-jesus .studio-person-copy { grid-column: 1 / span 5; grid-row: 1; }
 
 .studio-person-number {
   display: block;
