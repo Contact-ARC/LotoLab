@@ -138,7 +138,7 @@ const sourceProjects: GalleryProject[] = [
     year: "En proceso",
     area: "82 m²",
     discipline: "Hostelería · Interiorismo",
-    description: "Una intervención desarrollada en colaboración y en diálogo directo con el universo de marca de SantaGloria. El proyecto traslada su lenguaje de materiales, color y detalle al contexto aeroportuario, buscando un equilibrio entre funcionalidad, calidez y elegancia, con una imagen cuidada y reconocible incluso en un entorno de tránsito constante.",
+    description: "Una intervención desarrollada en colaboración y en diálogo directo con el universo de marca de Santa Gloria. El proyecto traslada su lenguaje de materiales, color y detalle al contexto aeroportuario, buscando un equilibrio entre funcionalidad, calidez y elegancia, con una imagen cuidada y reconocible incluso en un entorno de tránsito constante.",
     images: [asset("santa-gloria", "main pro.jpg")],
     alt: "Proyecto Santa Gloria en el aeropuerto de Santiago",
   },

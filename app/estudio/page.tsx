@@ -89,7 +89,7 @@ export default function StudioPage() {
       </div>
 
       <section className="studio-closing" data-studio-reveal>
-        <p>Dos miradas.<br />Un mismo proyecto.</p>
+        <p>Dos miradas,<br />Un mismo proyecto</p>
         <a href="/contacto">
           <span>¿Qué tienes entre manos?</span>
           <RoundArrow className="studio-cta-arrow" />

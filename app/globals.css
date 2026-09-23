@@ -352,7 +352,7 @@ button { font: inherit; }
   font-size: clamp(4rem, 9.4vw, 10rem);
   font-weight: 700;
   letter-spacing: -0.065em;
-  line-height: 0.86;
+  line-height: 0.96;
   text-wrap: balance;
 }
 
@@ -603,7 +603,7 @@ button { font: inherit; }
   font-size: clamp(2.8rem, 5.2vw, 6.2rem);
   font-weight: 700;
   letter-spacing: -0.065em;
-  line-height: 0.83;
+  line-height: 0.96;
 }
 
 .handoff-facts {
@@ -842,7 +842,7 @@ button { font: inherit; }
   font-size: clamp(2.75rem, 5.8vw, 6.5rem);
   font-weight: 500;
   letter-spacing: -0.07em;
-  line-height: 0.9;
+  line-height: 0.96;
 }
 
 .process-heading p {
@@ -1095,7 +1095,7 @@ button { font: inherit; }
   font-size: clamp(3rem, 8.2vw, 9.5rem);
   font-weight: 800;
   letter-spacing: -0.07em;
-  line-height: 0.86;
+  line-height: 0.96;
   text-transform: uppercase;
   transition: opacity 260ms ease;
 }
@@ -1162,7 +1162,7 @@ button { font: inherit; }
   font-size: clamp(3.8rem, 7.8vw, 9rem);
   font-weight: 700;
   letter-spacing: -0.075em;
-  line-height: 0.94;
+  line-height: 0.96;
   text-transform: uppercase;
 }
 
@@ -1378,7 +1378,7 @@ button { font: inherit; }
   font-size: clamp(3.8rem, 7.5vw, 8.5rem);
   font-weight: 700;
   letter-spacing: -0.07em;
-  line-height: 0.9;
+  line-height: 0.96;
   text-transform: uppercase;
 }
 
@@ -1484,7 +1484,7 @@ button { font: inherit; }
   font-size: clamp(2.5rem, 4.8vw, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.065em;
-  line-height: 0.9;
+  line-height: 0.96;
   text-transform: uppercase;
 }
 
@@ -1536,7 +1536,7 @@ button { font: inherit; }
   font-size: clamp(3rem, 7vw, 8rem);
   font-weight: 800;
   letter-spacing: -0.065em;
-  line-height: 0.88;
+  line-height: 0.96;
   text-transform: uppercase;
   transition: opacity 220ms ease;
 }
@@ -1600,7 +1600,7 @@ button { font: inherit; }
   font-size: clamp(3.5rem, 7vw, 8rem);
   font-weight: 700;
   letter-spacing: -0.07em;
-  line-height: 0.92;
+  line-height: 0.96;
   text-transform: uppercase;
 }
 
@@ -1683,7 +1683,7 @@ button { font: inherit; }
   font-size: clamp(2.6rem, 4.7vw, 5.5rem);
   font-weight: 650;
   letter-spacing: -0.065em;
-  line-height: 0.92;
+  line-height: 0.96;
   text-transform: uppercase;
 }
 
@@ -1712,17 +1712,17 @@ button { font: inherit; }
 }
 
 .studio-closing {
-  padding-top: clamp(7rem, 12vw, 13rem);
+  padding-top: clamp(4rem, 7vw, 7rem);
 }
 
 .studio-closing > p {
   max-width: 12ch;
-  margin: 0 0 clamp(4rem, 7vw, 7rem);
+  margin: 0 0 clamp(5.5rem, 9vw, 9rem);
   color: var(--loto-red);
   font-size: clamp(3.2rem, 7.5vw, 8.5rem);
   font-weight: 700;
   letter-spacing: -0.07em;
-  line-height: 0.88;
+  line-height: 0.96;
   text-transform: uppercase;
 }
 
@@ -1741,7 +1741,7 @@ button { font: inherit; }
   font-size: clamp(3rem, 7vw, 8rem);
   font-weight: 800;
   letter-spacing: -0.065em;
-  line-height: 0.88;
+  line-height: 0.96;
   text-transform: uppercase;
   transition: opacity 220ms ease;
 }
@@ -1858,7 +1858,7 @@ button { font: inherit; }
   font-size: clamp(5rem, 12vw, 13rem);
   font-weight: 700;
   letter-spacing: -0.075em;
-  line-height: 0.82;
+  line-height: 0.96;
   text-transform: uppercase;
 }
 
@@ -2086,7 +2086,7 @@ button { font: inherit; }
   font-size: clamp(1.55rem, 2.65vw, 3.2rem);
   font-weight: 500;
   letter-spacing: -0.065em;
-  line-height: 0.92;
+  line-height: 1;
 }
 
 .gallery-facts {
@@ -2264,7 +2264,7 @@ button { font: inherit; }
   .studio-intro h1 {
     max-width: 10ch;
     font-size: clamp(3rem, 13vw, 5rem);
-    line-height: 0.94;
+    line-height: 0.96;
   }
 
   .studio-intro-copy {
@@ -2294,10 +2294,10 @@ button { font: inherit; }
     font-size: clamp(2.7rem, 12vw, 4.4rem);
   }
 
-  .studio-closing { padding-top: 7rem; }
+  .studio-closing { padding-top: 3.5rem; }
 
   .studio-closing > p {
-    margin-bottom: 4.5rem;
+    margin-bottom: 6rem;
     font-size: clamp(3rem, 13vw, 5rem);
   }
 
@@ -2314,7 +2314,7 @@ button { font: inherit; }
 
   .services-intro h1 {
     font-size: clamp(3.1rem, 13vw, 5rem);
-    line-height: 0.94;
+    line-height: 0.96;
   }
 
   .services-intro p {
@@ -2390,12 +2390,12 @@ button { font: inherit; }
 
   .archive-heading h1 {
     font-size: clamp(3rem, 14vw, 6rem);
-    line-height: 0.86;
+    line-height: 0.96;
   }
 
   .archive-heading p {
     max-width: 21rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 
   .archive-grid {
@@ -2444,11 +2444,14 @@ button { font: inherit; }
   .opening-content h1 {
     max-width: 9ch;
     font-size: clamp(3.5rem, 15.6vw, 6rem);
-    line-height: 0.88;
+    line-height: 0.96;
   }
 
   .opening-kicker {
-    max-width: 14rem;
+    max-width: none;
+    white-space: nowrap;
+    font-size: clamp(0.58rem, 2.9vw, 0.67rem);
+    letter-spacing: 0.12em;
     line-height: 1.45;
   }
 
@@ -2832,7 +2835,7 @@ button { font: inherit; }
   font-size: clamp(2.5rem, 12vw, 4rem);
   font-weight: 700;
   letter-spacing: -0.05em;
-  line-height: 0.95;
+  line-height: 0.96;
   text-transform: uppercase;
 }
 

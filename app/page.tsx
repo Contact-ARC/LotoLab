@@ -109,7 +109,7 @@ const projectCatalog: Record<ProjectKey, Project> = {
     name: "Taxi Driver Barajas",
     place: "Bolsa de taxis · Madrid-Barajas",
     year: "2025",
-    area: "150,00 m²",
+    area: "150 m²",
     discipline: "Arquitectura efímera · Hospitality",
     description: "No queríamos diseñar un food truck. Queríamos construir un lugar extraño y cercano en mitad del asfalto. Una pequeña arquitectura envuelta por una segunda piel que se separa, se pliega y se extiende hasta convertirse en bancada, umbral y refugio. Bajo esa envolvente metálica aparece un interior rojo, cálido y casi doméstico. Una pausa inesperada dentro del movimiento continuo de los taxis.",
     images: [

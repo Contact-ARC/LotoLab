@@ -76,7 +76,7 @@ export function ProjectGallery({
                   <span>{project.number} / {String(Object.keys(projects).length).padStart(2, "0")}</span>
                   <DialogTitle>{project.name}</DialogTitle>
                   <p className="gallery-facts">{project.discipline}</p>
-                  <p className="gallery-facts">{project.year} · {project.place} · {project.area}</p>
+                  <p className="gallery-facts">{project.year !== "—" ? `${project.year} · ` : ""}{project.place} · {project.area}</p>
                 </div>
                 <div className="gallery-story">
                   <div className={`gallery-description ${detailsOpen ? "is-expanded" : ""}`}>
