@@ -23,6 +23,14 @@ function respond(int $code, array $body): void {
 
 function log_event(array $config, string $msg): void {
     $path = (string)($config['log_path'] ?? (__DIR__ . '/../private/contact.log'));
+    /* Rotate every ~90 days; only one previous file is kept, so entries live at most ~6 months */
+    $head = @file_get_contents($path, false, null, 0, 21);
+    if ($head !== false && preg_match('/^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/', $head, $mm)) {
+        $first = strtotime($mm[1] . ' UTC');
+        if ($first !== false && (time() - $first) > 90 * 86400) {
+            @rename($path, $path . '.old');
+        }
+    }
     @file_put_contents($path, '[' . gmdate('Y-m-d H:i:s') . " UTC] $msg\n", FILE_APPEND | LOCK_EX);
 }
 
@@ -147,6 +155,7 @@ if ($nombre === '' || mb_strlen($nombre) < 2 || preg_match('/[\r\n]/', $nombre))
 if (!filter_var($email, FILTER_VALIDATE_EMAIL) || preg_match('/[\r\n]/', $email)) $errors[] = 'email';
 if ($mensaje === '' || mb_strlen($mensaje) < 5) $errors[] = 'mensaje';
 if (!in_array($tipo, ['Proyecto', 'Colaboración', 'Una idea'], true)) $tipo = 'Proyecto';
+if (empty($_POST['privacidad'])) $errors[] = 'privacidad';
 if ($errors) {
     respond(400, ['success' => false, 'message' => 'Revisa los campos del formulario.', 'fields' => $errors]);
 }
@@ -181,15 +190,19 @@ try {
     $t = htmlspecialchars($tipo,    ENT_QUOTES, 'UTF-8');
     $m = nl2br(htmlspecialchars($mensaje, ENT_QUOTES, 'UTF-8'));
 
+    $consentAt = (new DateTimeImmutable('now', new DateTimeZone('Europe/Madrid')))->format('d/m/Y H:i');
+
     $mail->isHTML(true);
     $mail->Body =
         '<h2 style="font-family:sans-serif">Nuevo mensaje desde la web</h2>' .
         "<p><strong>Nombre:</strong> {$n}</p>" .
         "<p><strong>Email:</strong> {$e}</p>" .
         "<p><strong>Tipo:</strong> {$t}</p>" .
-        "<p><strong>Mensaje:</strong><br>{$m}</p>";
+        "<p><strong>Mensaje:</strong><br>{$m}</p>" .
+        "<p style=\"color:#666;font-size:12px\">Política de privacidad aceptada el {$consentAt}</p>";
     $mail->AltBody =
-        "Nuevo mensaje desde la web\n\nNombre: {$nombre}\nEmail: {$email}\nTipo: {$tipo}\n\nMensaje:\n{$mensaje}\n";
+        "Nuevo mensaje desde la web\n\nNombre: {$nombre}\nEmail: {$email}\nTipo: {$tipo}\n\nMensaje:\n{$mensaje}\n\n" .
+        "Política de privacidad aceptada el {$consentAt}\n";
 
     $mail->send();
     respond(200, ['success' => true, 'message' => '¡Gracias! Hemos recibido tu mensaje.']);

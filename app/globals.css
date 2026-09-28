@@ -2860,3 +2860,160 @@ button { font: inherit; }
   opacity: 1;
   visibility: visible;
 }
+
+/* ---------- Legal: consent checkbox in contact form ---------- */
+.contact-consent {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 46rem;
+}
+
+.contact-form .contact-consent-check {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.45;
+  text-transform: none;
+}
+
+.contact-form .contact-consent-check input {
+  appearance: none;
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0.1rem 0 0;
+  padding: 0;
+  border: 1px solid var(--loto-warm);
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+}
+
+.contact-form .contact-consent-check input::after {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--loto-warm);
+  transform: scale(0);
+  transition: transform 120ms ease;
+}
+
+.contact-form .contact-consent-check input:checked::after { transform: scale(1); }
+.contact-form .contact-consent-check input:focus-visible { outline: 1px solid var(--loto-warm); outline-offset: 3px; }
+
+.contact-consent a { text-decoration: underline; text-underline-offset: 2px; }
+
+.contact-consent-info {
+  margin: 0;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  opacity: 0.72;
+}
+
+/* ---------- Legal: site-wide footer ---------- */
+.legal-footer {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding: 1.25rem var(--page-pad) 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--loto-ink) 18%, transparent);
+  background: var(--loto-warm);
+  color: var(--loto-ink);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.legal-footer nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.legal-footer a:hover { opacity: 0.6; }
+.legal-footer a:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
+.legal-footer span { opacity: 0.6; }
+
+/* Contact page is red: continue it into the footer */
+.contact-page ~ .legal-footer {
+  border-top-color: color-mix(in srgb, var(--loto-warm) 30%, transparent);
+  background: var(--loto-red);
+  color: var(--loto-warm);
+}
+
+/* ---------- Legal: aviso legal / privacidad pages ---------- */
+.legal-page {
+  min-height: 100%;
+  padding: clamp(5.85rem, 8.25vw, 7.65rem) var(--page-pad) clamp(4rem, 7vw, 7rem);
+  background: var(--loto-warm);
+  color: var(--loto-ink);
+}
+
+.legal-body {
+  max-width: 46rem;
+  padding-top: clamp(2.5rem, 5vw, 5rem);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.legal-body h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.legal-updated {
+  margin: 0 0 clamp(2rem, 4vw, 3.5rem);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.legal-body h2 {
+  margin: 2.75rem 0 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--loto-ink) 24%, transparent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.legal-body p,
+.legal-body li { margin: 0 0 1rem; }
+.legal-body ul { margin: 0 0 1rem; padding-left: 1.25rem; list-style: disc; }
+.legal-body a { text-decoration: underline; text-underline-offset: 3px; }
+.legal-body a:hover { color: var(--loto-red); }
+.legal-body a:focus-visible { outline: 1px solid var(--loto-red); outline-offset: 2px; }
+.legal-body strong { font-weight: 700; }
+
+.legal-body dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.45rem 1.75rem;
+  margin: 0 0 1rem;
+}
+.legal-body dt { opacity: 0.6; }
+.legal-body dd { margin: 0; }
+
+.legal-crosslink { margin-top: 3rem !important; }
+
+.legal-page ::selection { background: var(--loto-red); color: var(--loto-warm); }
+
+@media (max-width: 36rem) {
+  .legal-body dl { grid-template-columns: 1fr; gap: 0.1rem; }
+  .legal-body dd { margin-bottom: 0.7rem; }
+}

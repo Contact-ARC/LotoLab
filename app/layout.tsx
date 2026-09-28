@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { LegalFooter } from "@/components/legal-footer";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -102,6 +103,7 @@ export default function RootLayout({
     <html lang="es">
       <body>
         {children}
+        <LegalFooter />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

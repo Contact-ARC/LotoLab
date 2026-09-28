@@ -63,6 +63,23 @@ export function ContactForm() {
           <option>Una idea</option>
         </select>
       </label>
+      <div className="contact-consent">
+        <label className="contact-consent-check">
+          <input type="checkbox" name="privacidad" value="1" required />
+          <span>
+            He leído y acepto la{" "}
+            <a href="/privacidad" target="_blank" rel="noopener">política de privacidad</a>.
+          </span>
+        </label>
+        <p className="contact-consent-info">
+          <strong>Responsable:</strong> The Loto Lab S.L.{" "}
+          <strong>Finalidad:</strong> atender tu consulta y mantener la comunicación contigo.{" "}
+          <strong>Legitimación:</strong> tu consentimiento y la aplicación de medidas precontractuales.{" "}
+          <strong>Destinatarios:</strong> no se cederán datos a terceros, salvo obligación legal.{" "}
+          <strong>Derechos:</strong> acceso, rectificación, supresión y demás derechos, en estudio@thelotolab.es.{" "}
+          Más información en la <a href="/privacidad">política de privacidad</a>.
+        </p>
+      </div>
       <button className="contact-submit" type="submit" disabled={status === "sending"}>
         <span>{status === "sending" ? "Enviando…" : "Empezamos"}</span>
         <RoundArrow className="contact-submit-arrow" />
