@@ -42,3 +42,4 @@ next-env.d.ts
 /work/
 contact-config.php
 deploy.sh
+*.tsbuildinfo
