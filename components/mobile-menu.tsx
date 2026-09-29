@@ -1,16 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { LangToggle } from "@/components/lang-toggle";
+import { navCopy, navLabels, navPages } from "@/components/site-nav-links";
+import { href, type Lang, type PageKey } from "@/lib/i18n";
 
-const links = [
-  { href: "/proyectos", label: "Proyectos" },
-  { href: "/estudio", label: "Estudio" },
-  { href: "/servicios", label: "Servicios" },
-  { href: "/contacto", label: "Contacto" },
-];
+const copy = {
+  es: { open: "Menú", dialog: "Menú de navegación", close: "Cerrar", closeLabel: "Cerrar menú" },
+  en: { open: "Menu", dialog: "Navigation menu", close: "Close", closeLabel: "Close menu" },
+} as const;
 
-export function MobileMenu({ negative = false }: { negative?: boolean }) {
+export function MobileMenu({ lang, page, negative = false }: { lang: Lang; page: PageKey; negative?: boolean }) {
   const [open, setOpen] = useState(false);
+  const t = copy[lang];
 
   useEffect(() => {
     if (!open) return;
@@ -35,31 +37,32 @@ export function MobileMenu({ negative = false }: { negative?: boolean }) {
         aria-controls="mobile-menu"
         onClick={() => setOpen(true)}
       >
-        Menú
+        {t.open}
       </button>
       <div
         id="mobile-menu"
         className={`mobile-menu ${negative ? "is-negative" : ""}`}
         role="dialog"
         aria-modal="true"
-        aria-label="Menú de navegación"
+        aria-label={t.dialog}
         hidden={!open}
       >
         <button
           type="button"
           className="mobile-menu-close"
           onClick={() => setOpen(false)}
-          aria-label="Cerrar menú"
+          aria-label={t.closeLabel}
         >
-          Cerrar
+          {t.close}
         </button>
-        <nav className="mobile-menu-nav" aria-label="Navegación principal">
-          {links.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
-              {link.label}
+        <nav className="mobile-menu-nav" aria-label={navCopy[lang].mainNav}>
+          {navPages.map((key) => (
+            <a key={key} href={href(key, lang)} onClick={() => setOpen(false)}>
+              {navLabels[lang][key as keyof (typeof navLabels)["es"]]}
             </a>
           ))}
         </nav>
+        <LangToggle lang={lang} page={page} className="lang-toggle-menu" />
       </div>
     </>
   );

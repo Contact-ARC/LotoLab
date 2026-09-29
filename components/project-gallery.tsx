@@ -3,6 +3,12 @@
 import { useEffect, useState } from "react";
 import { Dialog as DialogPrimitive } from "radix-ui";
 import { Dialog, DialogClose, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import type { Lang } from "@/lib/i18n";
+
+const copy = {
+  es: { image: (n: number, total: number) => `imagen ${n} de ${total}`, closeLabel: "Cerrar galería", close: "Cerrar ×", prev: "Imagen anterior", next: "Imagen siguiente", resume: "Reanudar secuencia", pause: "Pausar secuencia" },
+  en: { image: (n: number, total: number) => `image ${n} of ${total}`, closeLabel: "Close gallery", close: "Close ×", prev: "Previous image", next: "Next image", resume: "Resume slideshow", pause: "Pause slideshow" },
+};
 
 export type GalleryProject = {
   key: string;
@@ -18,10 +24,12 @@ export type GalleryProject = {
 };
 
 export function ProjectGallery({
+  lang = "es",
   activeProject,
   projects,
   onClose,
 }: {
+  lang?: Lang;
   activeProject: string | null;
   projects: Record<string, GalleryProject>;
   onClose: () => void;
@@ -30,6 +38,7 @@ export function ProjectGallery({
   const [paused, setPaused] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const project = activeProject ? projects[activeProject] : null;
+  const t = copy[lang];
 
   useEffect(() => {
     setSlide(0);
@@ -64,11 +73,11 @@ export function ProjectGallery({
                   key={`${project.key}-${slide}`}
                   className="gallery-image"
                   src={project.images[slide]}
-                  alt={`${project.name}, imagen ${slide + 1} de ${project.images.length}`}
+                  alt={`${project.name}, ${t.image(slide + 1, project.images.length)}`}
                 />
-                <DialogClose className="gallery-close" aria-label="Cerrar galería">Cerrar ×</DialogClose>
-                {hasMultipleImages && <button type="button" className="gallery-nav gallery-prev" onClick={() => move(-1)} aria-label="Imagen anterior">←</button>}
-                {hasMultipleImages && <button type="button" className="gallery-nav gallery-next" onClick={() => move(1)} aria-label="Imagen siguiente">→</button>}
+                <DialogClose className="gallery-close" aria-label={t.closeLabel}>{t.close}</DialogClose>
+                {hasMultipleImages && <button type="button" className="gallery-nav gallery-prev" onClick={() => move(-1)} aria-label={t.prev}>←</button>}
+                {hasMultipleImages && <button type="button" className="gallery-nav gallery-next" onClick={() => move(1)} aria-label={t.next}>→</button>}
               </div>
 
               <div className="gallery-copy">
@@ -92,7 +101,7 @@ export function ProjectGallery({
                     </button>
                   </div>
                   <div className="gallery-status">
-                    {hasMultipleImages && <button type="button" onClick={() => setPaused((value) => !value)}>{paused ? "Reanudar secuencia" : "Pausar secuencia"}</button>}
+                    {hasMultipleImages && <button type="button" onClick={() => setPaused((value) => !value)}>{paused ? t.resume : t.pause}</button>}
                     <span>{String(slide + 1).padStart(2, "0")} / {String(project.images.length).padStart(2, "0")}</span>
                   </div>
                 </div>

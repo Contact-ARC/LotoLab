@@ -1,14 +1,18 @@
+import { LangToggle } from "@/components/lang-toggle";
 import { MobileMenu } from "@/components/mobile-menu";
+import { navCopy, navLabels, navPages } from "@/components/site-nav-links";
+import { href, type Lang, type PageKey } from "@/lib/i18n";
 
 type SecondaryHeaderProps = {
-  current?: "proyectos" | "estudio" | "servicios" | "contacto";
+  lang: Lang;
+  page: PageKey;
   negative?: boolean;
 };
 
-export function SecondaryHeader({ current, negative = false }: SecondaryHeaderProps) {
+export function SecondaryHeader({ lang, page, negative = false }: SecondaryHeaderProps) {
   return (
     <>
-      <a href="/" className="secondary-logo-link" aria-label="Volver a The Loto Lab">
+      <a href={href("home", lang)} className="secondary-logo-link" aria-label={navCopy[lang].backHome}>
         <img
           className={`flight-logo secondary-flight-logo ${negative ? "is-negative" : ""}`}
           src="/brand/logo-horizontal.svg"
@@ -16,12 +20,14 @@ export function SecondaryHeader({ current, negative = false }: SecondaryHeaderPr
         />
       </a>
       <header className={`site-header secondary-site-header ${negative ? "is-negative" : ""}`}>
-        <nav className="site-nav" aria-label="Navegación principal">
-          <a href="/proyectos" aria-current={current === "proyectos" ? "page" : undefined}>Proyectos</a>
-          <a href="/estudio" aria-current={current === "estudio" ? "page" : undefined}>Estudio</a>
-          <a href="/servicios" aria-current={current === "servicios" ? "page" : undefined}>Servicios</a>
-          <a href="/contacto" aria-current={current === "contacto" ? "page" : undefined}>Contacto</a>
-          <MobileMenu negative={negative} />
+        <nav className="site-nav" aria-label={navCopy[lang].mainNav}>
+          {navPages.map((key) => (
+            <a key={key} href={href(key, lang)} aria-current={page === key ? "page" : undefined}>
+              {navLabels[lang][key as keyof (typeof navLabels)["es"]]}
+            </a>
+          ))}
+          <LangToggle lang={lang} page={page} />
+          <MobileMenu lang={lang} page={page} negative={negative} />
         </nav>
       </header>
     </>

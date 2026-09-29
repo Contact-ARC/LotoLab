@@ -7,7 +7,7 @@
 # routes, then shut the server down. No runtime is needed by the deployed site.
 set -uo pipefail
 
-ROUTES=("" "estudio" "servicios" "proyectos" "contacto" "privacidad" "aviso-legal")  # add new routes here
+ROUTES=("" "estudio" "servicios" "proyectos" "contacto" "privacidad" "aviso-legal" "en" "en/studio" "en/services" "en/projects" "en/contact" "en/privacy" "en/legal-notice")  # add new routes here
 PORT=3000
 BASE="http://127.0.0.1:${PORT}"
 BIN="./node_modules/.bin/vinext"

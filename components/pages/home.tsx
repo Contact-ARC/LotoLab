@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { RoundArrow } from "@/components/round-arrow";
 import { ProjectGallery } from "@/components/project-gallery";
 import { MobileMenu } from "@/components/mobile-menu";
+import { LangToggle } from "@/components/lang-toggle";
+import { navCopy, navLabels } from "@/components/site-nav-links";
+import { arrivedFromLangSwitch, href, type Lang } from "@/lib/i18n";
 
 type SpringPiece = {
   element: SVGGraphicsElement;
@@ -36,16 +39,15 @@ type Project = {
   className: string;
 };
 
-const projectCatalog: Record<ProjectKey, Project> = {
+type LocalizedProject = Pick<Project, "place" | "discipline" | "description" | "alt">;
+
+const projectBase: Record<ProjectKey, Omit<Project, keyof LocalizedProject> & Record<Lang, LocalizedProject>> = {
   beher: {
     key: "beher",
     number: "01",
     name: "Beher Valladolid",
-    place: "Valladolid",
     year: "2025",
     area: "148 m²",
-    discipline: "Hostelería · Arquitectura interior",
-    description: "En el centro histórico de Valladolid, junto a la Catedral, el proyecto transforma un local en bruto en un espacio que integra restaurante, barra y charcutería. La propuesta construye una identidad reconocible mediante el equilibrio entre el rojo corporativo, el acero y la madera. Como gesto diferencial, una gran barra circular de acero y pavés retroiluminado organiza el conjunto y concentra la actividad, mientras la exposición del producto y la cocina al fuego refuerzan el vínculo con la tradición gastronómica. El resultado es un interior contemporáneo, funcional y con carácter, donde la arquitectura cede el protagonismo a la luz, que termina adueñándose del exterior.",
     images: [
       "/projects-v2/beher/01-main.webp",
       "/projects-v2/beher/02-c5a1922.webp",
@@ -58,18 +60,26 @@ const projectCatalog: Record<ProjectKey, Project> = {
       "/projects-v2/beher/09-study.webp",
       "/projects-v2/beher/10-study.webp",
     ],
-    alt: "Interior del proyecto Beher Valladolid",
     className: "project-beher",
+    es: {
+      place: "Valladolid",
+      discipline: "Hostelería · Arquitectura interior",
+      description: "En el centro histórico de Valladolid, junto a la Catedral, el proyecto transforma un local en bruto en un espacio que integra restaurante, barra y charcutería. La propuesta construye una identidad reconocible mediante el equilibrio entre el rojo corporativo, el acero y la madera. Como gesto diferencial, una gran barra circular de acero y pavés retroiluminado organiza el conjunto y concentra la actividad, mientras la exposición del producto y la cocina al fuego refuerzan el vínculo con la tradición gastronómica. El resultado es un interior contemporáneo, funcional y con carácter, donde la arquitectura cede el protagonismo a la luz, que termina adueñándose del exterior.",
+      alt: "Interior del proyecto Beher Valladolid",
+    },
+    en: {
+      place: "Valladolid",
+      discipline: "Hospitality · Interior architecture",
+      description: "In Valladolid's historic centre, next to the Cathedral, the project transforms a bare shell into a space that brings together a restaurant, a bar and a charcuterie counter. The design builds a recognisable identity through a balance of corporate red, steel and wood. As its signature gesture, a large circular bar in steel and backlit glass block organises the whole and concentrates the activity, while the display of produce and the open-fire kitchen strengthen the link with gastronomic tradition. The result is a contemporary, functional interior with character, where the architecture gives the spotlight to light, which ends up taking over the exterior.",
+      alt: "Interior of the Beher Valladolid project",
+    },
   },
   bottega: {
     key: "bottega",
     number: "02",
     name: "Bottega T4",
-    place: "Aeropuerto Adolfo Suárez · Madrid",
     year: "2024",
     area: "47 m²",
-    discipline: "Retail aeroportuario · Interiorismo",
-    description: "En medio del flujo incesante de la T4, el corner de Bottega emerge como un lingote de oro suspendido: una pieza compacta, luminosa e inconfundible desde la distancia. El nogal y el negro conforman una base elegante y serena, mientras el techo dorado amplifica la luz y multiplica los reflejos de las botellas. En torno al pilar central, transformado en una gran vitrina vertical, el espacio se abre al ritmo del aeropuerto para ofrecer una pausa brillante y sofisticada: un lugar donde detener el viaje y disfrutar del instante.",
     images: [
       "/projects-v2/bottega/01-main.webp",
       "/projects-v2/bottega/02-corner.webp",
@@ -79,18 +89,26 @@ const projectCatalog: Record<ProjectKey, Project> = {
       "/projects-v2/bottega/06-producto.webp",
       "/projects-v2/bottega/07-vertical.webp",
     ],
-    alt: "Corner dorado del proyecto Bottega Barajas",
     className: "project-bottega",
+    es: {
+      place: "Aeropuerto Adolfo Suárez · Madrid",
+      discipline: "Retail aeroportuario · Interiorismo",
+      description: "En medio del flujo incesante de la T4, el corner de Bottega emerge como un lingote de oro suspendido: una pieza compacta, luminosa e inconfundible desde la distancia. El nogal y el negro conforman una base elegante y serena, mientras el techo dorado amplifica la luz y multiplica los reflejos de las botellas. En torno al pilar central, transformado en una gran vitrina vertical, el espacio se abre al ritmo del aeropuerto para ofrecer una pausa brillante y sofisticada: un lugar donde detener el viaje y disfrutar del instante.",
+      alt: "Corner dorado del proyecto Bottega Barajas",
+    },
+    en: {
+      place: "Adolfo Suárez Airport · Madrid",
+      discipline: "Airport retail · Interior design",
+      description: "Amid the relentless flow of T4, the Bottega corner emerges like a suspended gold ingot: a compact, luminous piece, unmistakable from a distance. Walnut and black form an elegant, serene base, while the gold ceiling amplifies the light and multiplies the reflections of the bottles. Around the central pillar, transformed into a large vertical display case, the space opens up to the rhythm of the airport to offer a bright, sophisticated pause: a place to put the journey on hold and enjoy the moment.",
+      alt: "Gold corner of the Bottega Barajas project",
+    },
   },
   burgos: {
     key: "burgos",
     number: "03",
     name: "Más Cosas Burgos",
-    place: "Estación Rosa Manzano · Burgos",
     year: "2025",
     area: "283 m²",
-    discipline: "Hospitality · Espacio de espera",
-    description: "Una estación es, casi siempre, un lugar entre lugares. En Burgos quisimos que la espera tuviera algo de hogar. Con un presupuesto mínimo y un único color, el naranja se extiende por el gran espacio vacío, dibujando arcos, rincones y pequeñas escenas donde sentarse, comer o simplemente dejar pasar el tiempo. Una intervención sencilla que intenta ofrecer algo esencial: un poco de calidez y dignidad antes de continuar el viaje.",
     images: [
       "/projects-v2/burgos/01-main.webp",
       "/projects-v2/burgos/02-c5a2294.webp",
@@ -100,18 +118,26 @@ const projectCatalog: Record<ProjectKey, Project> = {
       "/projects-v2/burgos/06-c5a2276.webp",
       "/projects-v2/burgos/07-c5a2260.webp",
     ],
-    alt: "Espacio naranja del proyecto de la estación de Burgos",
     className: "project-burgos",
+    es: {
+      place: "Estación Rosa Manzano · Burgos",
+      discipline: "Hospitality · Espacio de espera",
+      description: "Una estación es, casi siempre, un lugar entre lugares. En Burgos quisimos que la espera tuviera algo de hogar. Con un presupuesto mínimo y un único color, el naranja se extiende por el gran espacio vacío, dibujando arcos, rincones y pequeñas escenas donde sentarse, comer o simplemente dejar pasar el tiempo. Una intervención sencilla que intenta ofrecer algo esencial: un poco de calidez y dignidad antes de continuar el viaje.",
+      alt: "Espacio naranja del proyecto de la estación de Burgos",
+    },
+    en: {
+      place: "Rosa Manzano station · Burgos",
+      discipline: "Hospitality · Waiting area",
+      description: "A station is almost always a place between places. In Burgos we wanted waiting to feel a little like home. With a minimal budget and a single colour, orange spreads across the large empty space, drawing arches, corners and small scenes in which to sit, eat or simply let time pass. A simple intervention that tries to offer something essential: a little warmth and dignity before continuing the journey.",
+      alt: "Orange space of the Burgos station project",
+    },
   },
   foodtruck: {
     key: "foodtruck",
     number: "04",
     name: "Taxi Driver Barajas",
-    place: "Bolsa de taxis · Madrid-Barajas",
     year: "2025",
     area: "150 m²",
-    discipline: "Arquitectura efímera · Hospitality",
-    description: "No queríamos diseñar un food truck. Queríamos construir un lugar extraño y cercano en mitad del asfalto. Una pequeña arquitectura envuelta por una segunda piel que se separa, se pliega y se extiende hasta convertirse en bancada, umbral y refugio. Bajo esa envolvente metálica aparece un interior rojo, cálido y casi doméstico. Una pausa inesperada dentro del movimiento continuo de los taxis.",
     images: [
       "/projects-v2/foodtruck/01-main.webp",
       "/projects-v2/foodtruck/02-c5a6407.webp",
@@ -120,12 +146,81 @@ const projectCatalog: Record<ProjectKey, Project> = {
       "/projects-v2/foodtruck/05-c5a6489.webp",
       "/projects-v2/foodtruck/06-c5a6511.webp",
     ],
-    alt: "Foodtruck rojo Taxi Driver",
     className: "project-foodtruck",
+    es: {
+      place: "Bolsa de taxis · Madrid-Barajas",
+      discipline: "Arquitectura efímera · Hospitality",
+      description: "No queríamos diseñar un food truck. Queríamos construir un lugar extraño y cercano en mitad del asfalto. Una pequeña arquitectura envuelta por una segunda piel que se separa, se pliega y se extiende hasta convertirse en bancada, umbral y refugio. Bajo esa envolvente metálica aparece un interior rojo, cálido y casi doméstico. Una pausa inesperada dentro del movimiento continuo de los taxis.",
+      alt: "Foodtruck rojo Taxi Driver",
+    },
+    en: {
+      place: "Taxi rank · Madrid-Barajas",
+      discipline: "Ephemeral architecture · Hospitality",
+      description: "We didn't want to design a food truck. We wanted to build a strange yet familiar place in the middle of the tarmac. A small piece of architecture wrapped in a second skin that separates, folds and extends until it becomes bench, threshold and shelter. Beneath that metal envelope lies a red, warm, almost domestic interior. An unexpected pause within the constant movement of the taxis.",
+      alt: "Red Taxi Driver food truck",
+    },
   },
 };
 
-function LoadTestFour() {
+const catalogFor = (lang: Lang) =>
+  Object.fromEntries(
+    Object.values(projectBase).map(({ es, en, ...common }) => [common.key, { ...common, ...(lang === "en" ? en : es) }]),
+  ) as Record<ProjectKey, Project>;
+
+const projectCatalogs: Record<Lang, Record<ProjectKey, Project>> = { es: catalogFor("es"), en: catalogFor("en") };
+
+const copy = {
+  es: {
+    logoAnimation: "Animación del logotipo The Loto Lab",
+    featured: "Proyecto destacado",
+    featuredAlt: "Barra curva iluminada en rojo del proyecto Beher Valladolid de The Loto Lab",
+    drawingLabel: "El proyecto se construye con líneas antes de adquirir luz y materia",
+    openBeher: "Abrir galería de Beher Valladolid",
+    selected: "Proyectos seleccionados",
+    keepExploring: "Continuar explorando",
+    projectsFoot: "Espacios que nacen del contexto y terminan formando parte de la memoria",
+    exploreProjects: "Explorar proyectos",
+    whatWeDo: "Qué hacemos",
+    whatWeDoSub: "De la primera intuición al espacio construido",
+    clients: "Clientes",
+    trust: "Confían en nosotros",
+    client: (n: number) => `Cliente ${n}`,
+    contact: "Contacto",
+    story: "¿Qué historia vamos a contar?",
+    exploreServices: "Explorar servicios",
+    intro: "Presentación de The Loto Lab",
+    replay: "Repetir ensayo",
+    kicker: "Arquitectura · Interiorismo · Diseño",
+    title: "Creamos espacios que cuentan historias",
+    lead: "Imaginamos y construimos lugares con identidad.",
+  },
+  en: {
+    logoAnimation: "The Loto Lab logo animation",
+    featured: "Featured project",
+    featuredAlt: "Curved bar lit in red in The Loto Lab's Beher Valladolid project",
+    drawingLabel: "The project is built in lines before it takes on light and matter",
+    openBeher: "Open the Beher Valladolid gallery",
+    selected: "Selected projects",
+    keepExploring: "Keep exploring",
+    projectsFoot: "Spaces born from their context that end up becoming part of memory",
+    exploreProjects: "Explore projects",
+    whatWeDo: "What we do",
+    whatWeDoSub: "From the first intuition to the built space",
+    clients: "Clients",
+    trust: "They trust us",
+    client: (n: number) => `Client ${n}`,
+    contact: "Contact",
+    story: "What story shall we tell?",
+    exploreServices: "Explore services",
+    intro: "Introducing The Loto Lab",
+    replay: "Replay",
+    kicker: "Architecture · Interiors · Design",
+    title: "We create spaces that tell stories",
+    lead: "We imagine and build places with identity.",
+  },
+};
+
+function LoadTestFour({ lang }: { lang: Lang }) {
   const lRef = useRef<SVGPathElement>(null);
   const firstORef = useRef<SVGCircleElement>(null);
   const tRef = useRef<SVGPathElement>(null);
@@ -321,7 +416,7 @@ function LoadTestFour() {
   }, []);
 
   return (
-    <div className="wordmark-stage" aria-label="Animación del logotipo The Loto Lab">
+    <div className="wordmark-stage" aria-label={copy[lang].logoAnimation}>
       <div className="wordmark-art">
         <svg className="moving-pieces" viewBox="0 0 354.73 191" aria-hidden="true">
           <path
@@ -358,7 +453,8 @@ type AnimatedPath = {
   lastFraction: number;
 };
 
-function ScaleStory({ onOpenProject }: { onOpenProject: (project: ProjectKey) => void }) {
+function ScaleStory({ lang, onOpenProject }: { lang: Lang; onOpenProject: (project: ProjectKey) => void }) {
+  const t = copy[lang];
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const drawingRef = useRef<HTMLDivElement>(null);
@@ -545,7 +641,7 @@ function ScaleStory({ onOpenProject }: { onOpenProject: (project: ProjectKey) =>
   }, []);
 
   return (
-    <section ref={sectionRef} className="scale-story" id="proyectos" aria-label="Proyecto destacado">
+    <section ref={sectionRef} className="scale-story" id="proyectos" aria-label={t.featured}>
       <div ref={stageRef} className="scale-stage">
         <div className="story-frame">
           <img
@@ -557,13 +653,13 @@ function ScaleStory({ onOpenProject }: { onOpenProject: (project: ProjectKey) =>
           <img
             className="story-photo story-photo-final"
             src="/beher-valladolid-main.webp"
-            alt="Barra curva iluminada en rojo del proyecto Beher Valladolid de The Loto Lab"
+            alt={t.featuredAlt}
           />
           <div
             ref={drawingRef}
             className="drawing-vector"
             role="img"
-            aria-label="El proyecto se construye con líneas antes de adquirir luz y materia"
+            aria-label={t.drawingLabel}
           />
           <div className="drawing-grain" aria-hidden="true" />
           <video
@@ -587,7 +683,7 @@ function ScaleStory({ onOpenProject }: { onOpenProject: (project: ProjectKey) =>
             className="story-project-trigger"
             type="button"
             onClick={() => onOpenProject("beher")}
-            aria-label="Abrir galería de Beher Valladolid"
+            aria-label={t.openBeher}
           >
             <RoundArrow className="story-open-mark" />
           </button>
@@ -595,9 +691,9 @@ function ScaleStory({ onOpenProject }: { onOpenProject: (project: ProjectKey) =>
         <p className="drawing-caption">Beher · Valladolid</p>
         <div className="handoff-copy" aria-hidden="true">
           <span>01 / 04</span>
-          <p>Proyectos seleccionados</p>
+          <p>{t.selected}</p>
           <h2>Beher<br />Valladolid</h2>
-          <small>Hostelería · Arquitectura interior</small>
+          <small>{projectCatalogs[lang].beher.discipline}</small>
           <small className="handoff-facts">2025 · Valladolid · 148 m²</small>
         </div>
       </div>
@@ -605,21 +701,32 @@ function ScaleStory({ onOpenProject }: { onOpenProject: (project: ProjectKey) =>
   );
 }
 
-const selectedProjects = [projectCatalog.bottega, projectCatalog.burgos, projectCatalog.foodtruck];
 
-const processStages = [
-  { number: "01", title: "Imaginamos", terms: "concepto · estrategia · identidad espacial" },
-  { number: "02", title: "Proyectamos", terms: "arquitectura · interiorismo · detalle" },
-  { number: "03", title: "Hacemos posible", terms: "licencias · normativa · coordinación" },
-  { number: "04", title: "Construimos", terms: "obra · dirección · seguimiento" },
-] as const;
+const processStagesByLang = {
+  es: [
+    { number: "01", title: "Imaginamos", terms: "concepto · estrategia · identidad espacial" },
+    { number: "02", title: "Proyectamos", terms: "arquitectura · interiorismo · detalle" },
+    { number: "03", title: "Hacemos posible", terms: "licencias · normativa · coordinación" },
+    { number: "04", title: "Construimos", terms: "obra · dirección · seguimiento" },
+  ],
+  en: [
+    { number: "01", title: "We imagine", terms: "concept · strategy · spatial identity" },
+    { number: "02", title: "We design", terms: "architecture · interior design · detail" },
+    { number: "03", title: "We make it happen", terms: "permits · regulations · coordination" },
+    { number: "04", title: "We build", terms: "construction · site management · monitoring" },
+  ],
+} as const;
+const processStages = processStagesByLang.es;
 
 const clientLogos = Array.from(
   { length: 12 },
   (_, index) => `/clients/Aena_Logo_New-${String(index + 1).padStart(2, "0")}.svg`,
 );
 
-function SelectedProjects({ onOpenProject }: { onOpenProject: (project: ProjectKey) => void }) {
+function SelectedProjects({ lang, onOpenProject }: { lang: Lang; onOpenProject: (project: ProjectKey) => void }) {
+  const t = copy[lang];
+  const catalog = projectCatalogs[lang];
+  const selectedProjects = [catalog.bottega, catalog.burgos, catalog.foodtruck];
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -651,7 +758,7 @@ function SelectedProjects({ onOpenProject }: { onOpenProject: (project: ProjectK
   return (
     <section ref={sectionRef} className="selected-projects" id="seleccionados" aria-labelledby="selected-title">
       <header className="selected-heading" data-reveal>
-        <h2 id="selected-title">Continuar explorando</h2>
+        <h2 id="selected-title">{t.keepExploring}</h2>
         <span>02 — 04</span>
       </header>
 
@@ -677,14 +784,16 @@ function SelectedProjects({ onOpenProject }: { onOpenProject: (project: ProjectK
       </div>
 
       <footer className="projects-foot" data-reveal>
-        <p>Espacios que nacen del contexto y terminan formando parte de la memoria</p>
-        <a href="/proyectos">Explorar proyectos <b aria-hidden="true">→</b></a>
+        <p>{t.projectsFoot}</p>
+        <a href={href("projects", lang)}>{t.exploreProjects} <b aria-hidden="true">→</b></a>
       </footer>
     </section>
   );
 }
 
-function WhatWeDo() {
+function WhatWeDo({ lang }: { lang: Lang }) {
+  const t = copy[lang];
+  const stages = processStagesByLang[lang];
   const sectionRef = useRef<HTMLElement>(null);
   const [revealed, setRevealed] = useState(0);
   const [active, setActive] = useState<number | null>(null);
@@ -733,14 +842,14 @@ function WhatWeDo() {
       <div className="process-sticky">
         <header className="process-heading">
           <span>03</span>
-          <h2 id="process-title">Qué hacemos</h2>
-          <p>De la primera intuición al espacio construido</p>
+          <h2 id="process-title">{t.whatWeDo}</h2>
+          <p>{t.whatWeDoSub}</p>
         </header>
 
         <div className="process-diagram">
           <div className="process-track" aria-hidden="true"><span /></div>
           <ol className={active === null ? "" : "has-active"}>
-            {processStages.map((stage, index) => (
+            {stages.map((stage, index) => (
               <li
                 className={`${index < revealed ? "is-revealed" : ""} ${active === index ? "is-active" : ""}`}
                 key={stage.number}
@@ -772,18 +881,19 @@ function WhatWeDo() {
   );
 }
 
-function Clients() {
+function Clients({ lang }: { lang: Lang }) {
+  const t = copy[lang];
   return (
-    <section className="clients" aria-label="Clientes">
+    <section className="clients" aria-label={t.clients}>
       <div className="clients-heading">
-        <span>Confían en nosotros</span>
+        <span>{t.trust}</span>
       </div>
       <div className="clients-marquee">
         <div className="clients-runner">
-          {[0, 1].map((copy) => (
-            <div className="clients-set" aria-hidden={copy === 1} key={copy}>
+          {[0, 1].map((copyIndex) => (
+            <div className="clients-set" aria-hidden={copyIndex === 1} key={copyIndex}>
               {clientLogos.map((logo, index) => (
-                <img src={logo} alt={copy === 0 ? `Cliente ${index + 1}` : ""} key={`${copy}-${logo}`} />
+                <img src={logo} alt={copyIndex === 0 ? t.client(index + 1) : ""} key={`${copyIndex}-${logo}`} />
               ))}
             </div>
           ))}
@@ -793,28 +903,30 @@ function Clients() {
   );
 }
 
-function ContactCTA() {
+function ContactCTA({ lang }: { lang: Lang }) {
+  const t = copy[lang];
   return (
-    <section className="contact-cta" id="contacto" aria-label="Contacto">
-      <a href="/contacto">
-        <span className="contact-cta-copy">¿Qué historia vamos a contar?</span>
+    <section className="contact-cta" id="contacto" aria-label={t.contact}>
+      <a href={href("contact", lang)}>
+        <span className="contact-cta-copy">{t.story}</span>
         <RoundArrow className="cta-arrow" />
       </a>
     </section>
   );
 }
 
-function ServicesExplore() {
+function ServicesExplore({ lang }: { lang: Lang }) {
   return (
     <div className="services-explore">
-      <a href="/servicios">Explorar servicios <span aria-hidden="true">→</span></a>
+      <a href={href("services", lang)}>{copy[lang].exploreServices} <span aria-hidden="true">→</span></a>
     </div>
   );
 }
 
 type IntroPhase = "playing" | "handoff" | "flying" | "ready";
 
-export default function Home() {
+export function HomePage({ lang }: { lang: Lang }) {
+  const t = copy[lang];
   const [cycle, setCycle] = useState(0);
   const [phase, setPhase] = useState<IntroPhase>("playing");
   const [activeProject, setActiveProject] = useState<ProjectKey | null>(null);
@@ -822,7 +934,8 @@ export default function Home() {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // Skip the intro when the visitor arrives here by switching language.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || (cycle === 0 && arrivedFromLangSwitch())) {
       setPhase("ready");
       return;
     }
@@ -853,52 +966,53 @@ export default function Home() {
 
   return (
     <main className={`site-shell phase-${phase}`} id="inicio">
-      <a href="/" className="home-logo-link" aria-label="Volver al inicio">
+      <a href={href("home", lang)} className="home-logo-link" aria-label={navCopy[lang].backToStart}>
         <img className="flight-logo" src="/brand/logo-horizontal.svg" alt="The Loto Lab" />
       </a>
 
       <header className="site-header">
-        <nav className="site-nav" aria-label="Navegación principal">
-          <a href="/proyectos">Proyectos</a>
-          <a href="/estudio">Estudio</a>
-          <a href="/servicios">Servicios</a>
-          <a href="/contacto">Contacto</a>
-          <MobileMenu />
+        <nav className="site-nav" aria-label={navCopy[lang].mainNav}>
+          <a href={href("projects", lang)}>{navLabels[lang].projects}</a>
+          <a href={href("studio", lang)}>{navLabels[lang].studio}</a>
+          <a href={href("services", lang)}>{navLabels[lang].services}</a>
+          <a href={href("contact", lang)}>{navLabels[lang].contact}</a>
+          <LangToggle lang={lang} page="home" />
+          <MobileMenu lang={lang} page="home" />
         </nav>
       </header>
 
-      <section className="opening" aria-label="Presentación de The Loto Lab">
+      <section className="opening" aria-label={t.intro}>
         <section className="intro-scene" key={cycle}>
-          <LoadTestFour />
+          <LoadTestFour lang={lang} />
         </section>
 
         <footer className="intro-controls">
           <button type="button" onClick={replay}>
-            Repetir ensayo
+            {t.replay}
             <span aria-hidden="true">↻</span>
           </button>
         </footer>
 
         <div className="opening-content">
-          <p className="opening-kicker">Arquitectura · Interiorismo · Diseño</p>
-          <h1>Creamos espacios que cuentan historias</h1>
+          <p className="opening-kicker">{t.kicker}</p>
+          <h1>{t.title}</h1>
           <div className="opening-foot">
-            <p>Imaginamos y construimos lugares con identidad.</p>
-            <a href="/proyectos">
-              Explorar proyectos
+            <p>{t.lead}</p>
+            <a href={href("projects", lang)}>
+              {t.exploreProjects}
               <span aria-hidden="true">↓</span>
             </a>
           </div>
         </div>
       </section>
 
-      <ScaleStory onOpenProject={setActiveProject} />
-      <SelectedProjects onOpenProject={setActiveProject} />
-      <WhatWeDo />
-      <ServicesExplore />
-      <ContactCTA />
-      <Clients />
-      <ProjectGallery activeProject={activeProject} projects={projectCatalog} onClose={() => setActiveProject(null)} />
+      <ScaleStory lang={lang} onOpenProject={setActiveProject} />
+      <SelectedProjects lang={lang} onOpenProject={setActiveProject} />
+      <WhatWeDo lang={lang} />
+      <ServicesExplore lang={lang} />
+      <ContactCTA lang={lang} />
+      <Clients lang={lang} />
+      <ProjectGallery lang={lang} activeProject={activeProject} projects={projectCatalogs[lang]} onClose={() => setActiveProject(null)} />
     </main>
   );
 }

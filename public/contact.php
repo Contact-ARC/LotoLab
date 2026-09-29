@@ -149,6 +149,7 @@ $nombre  = $clean((string)($_POST['nombre']  ?? ''), 100);
 $email   = $clean((string)($_POST['email']   ?? ''), 150);
 $mensaje = $clean((string)($_POST['mensaje'] ?? ''), 5000);
 $tipo    = $clean((string)($_POST['tipo']    ?? ''), 40);
+$idioma  = (($_POST['idioma'] ?? 'es') === 'en') ? 'en' : 'es';
 
 $errors = [];
 if ($nombre === '' || mb_strlen($nombre) < 2 || preg_match('/[\r\n]/', $nombre)) $errors[] = 'nombre';
@@ -183,7 +184,8 @@ try {
     $mail->addAddress((string)$config['to_email'], (string)($config['to_name'] ?? ''));
     $mail->addReplyTo($email, $nombre);
 
-    $mail->Subject = 'Nuevo mensaje (' . $tipo . ') — thelotolab.es';
+    $mail->Subject = 'Nuevo mensaje (' . $tipo . ($idioma === 'en' ? ' · EN' : '') . ') — thelotolab.es';
+    $idiomaTxt = $idioma === 'en' ? 'Inglés (web en inglés: responder en inglés)' : 'Español';
 
     $n = htmlspecialchars($nombre,  ENT_QUOTES, 'UTF-8');
     $e = htmlspecialchars($email,   ENT_QUOTES, 'UTF-8');
@@ -198,10 +200,11 @@ try {
         "<p><strong>Nombre:</strong> {$n}</p>" .
         "<p><strong>Email:</strong> {$e}</p>" .
         "<p><strong>Tipo:</strong> {$t}</p>" .
+        "<p><strong>Idioma:</strong> {$idiomaTxt}</p>" .
         "<p><strong>Mensaje:</strong><br>{$m}</p>" .
         "<p style=\"color:#666;font-size:12px\">Política de privacidad aceptada el {$consentAt}</p>";
     $mail->AltBody =
-        "Nuevo mensaje desde la web\n\nNombre: {$nombre}\nEmail: {$email}\nTipo: {$tipo}\n\nMensaje:\n{$mensaje}\n\n" .
+        "Nuevo mensaje desde la web\n\nNombre: {$nombre}\nEmail: {$email}\nTipo: {$tipo}\nIdioma: {$idiomaTxt}\n\nMensaje:\n{$mensaje}\n\n" .
         "Política de privacidad aceptada el {$consentAt}\n";
 
     $mail->send();

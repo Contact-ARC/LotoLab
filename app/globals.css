@@ -3017,3 +3017,48 @@ button { font: inherit; }
   .legal-body dl { grid-template-columns: 1fr; gap: 0.1rem; }
   .legal-body dd { margin-bottom: 0.7rem; }
 }
+
+/* ---------- Language toggle (ES / EN) ---------- */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding-left: clamp(1.2rem, 2.6vw, 3rem);
+  border-left: 1px solid color-mix(in srgb, currentColor 32%, transparent);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.lang-toggle-item { display: inline-flex; align-items: center; gap: 0.45em; }
+.lang-toggle-sep { opacity: 0.4; font-weight: 400; }
+.lang-toggle-current { padding: 0.5rem 0; }
+
+.site-nav .lang-toggle a {
+  display: inline-block;
+  opacity: 0.45;
+  transition: opacity 180ms ease;
+}
+
+.site-nav .lang-toggle a:hover,
+.site-nav .lang-toggle a:focus-visible { opacity: 1; }
+.lang-toggle a:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
+
+/* Mobile: the nav links collapse into "Menú", the toggle stays visible next to it */
+@media (max-width: 700px) {
+  .site-nav .lang-toggle { padding-left: 0; border-left: 0; }
+  .site-nav .lang-toggle a { display: inline-block; }
+}
+
+/* Inside the full-screen mobile menu */
+.lang-toggle-menu {
+  align-self: flex-start;
+  margin-bottom: clamp(1rem, 4vh, 2rem);
+  padding: 1.1rem 0 0;
+  border-left: 0;
+  border-top: 1px solid color-mix(in srgb, currentColor 32%, transparent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.lang-toggle-menu a { opacity: 0.45; }

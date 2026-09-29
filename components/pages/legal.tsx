@@ -1,20 +1,20 @@
-import type { Metadata } from "next";
 import { SecondaryHeader } from "@/components/secondary-header";
+import { LegalEn } from "@/components/pages/legal-en";
+import { REGISTRO_MERCANTIL } from "@/lib/company";
+import { href, type Lang } from "@/lib/i18n";
 
-// ⚠️ Completar con los datos de la escritura / nota simple del Registro Mercantil
-// antes de publicar (p. ej. "Tomo 12345, Folio 67, Hoja M-123456, Inscripción 1.ª").
-const REGISTRO_MERCANTIL = "Tomo 46313, Folio 190, Sección 8.ª, Hoja M-813468, Inscripción 1.ª";
-
-export const metadata: Metadata = {
-  title: "Aviso legal",
-  description: "Aviso legal y condiciones de uso de thelotolab.es, sitio web de The Loto Lab S.L.",
-  alternates: { canonical: "/aviso-legal" },
-};
-
-export default function AvisoLegalPage() {
+export function LegalPage({ lang }: { lang: Lang }) {
   return (
     <main className="legal-page">
-      <SecondaryHeader />
+      <SecondaryHeader lang={lang} page="legal" />
+      {lang === "en" ? <LegalEn /> : <LegalEs />}
+    </main>
+  );
+}
+
+function LegalEs() {
+  return (
+    <>
 
       <article className="legal-body">
         <h1>Aviso legal</h1>
@@ -103,7 +103,7 @@ export default function AvisoLegalPage() {
         <h2>Protección de datos</h2>
         <p>
           El tratamiento de los datos personales que nos facilitas se describe en nuestra{" "}
-          <a href="/privacidad">política de privacidad</a>.
+          <a href={href("privacy", "es")}>política de privacidad</a>.
         </p>
 
         <h2>Legislación aplicable y jurisdicción</h2>
@@ -114,6 +114,6 @@ export default function AvisoLegalPage() {
           domicilio.
         </p>
       </article>
-    </main>
+    </>
   );
 }

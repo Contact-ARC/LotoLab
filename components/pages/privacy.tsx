@@ -1,17 +1,19 @@
-import type { Metadata } from "next";
 import { SecondaryHeader } from "@/components/secondary-header";
+import { PrivacyEn } from "@/components/pages/privacy-en";
+import { href, type Lang } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Política de privacidad",
-  description:
-    "Cómo trata The Loto Lab S.L. los datos personales que nos facilitas a través de thelotolab.es.",
-  alternates: { canonical: "/privacidad" },
-};
-
-export default function PrivacidadPage() {
+export function PrivacyPage({ lang }: { lang: Lang }) {
   return (
     <main className="legal-page">
-      <SecondaryHeader />
+      <SecondaryHeader lang={lang} page="privacy" />
+      {lang === "en" ? <PrivacyEn /> : <PrivacyEs />}
+    </main>
+  );
+}
+
+function PrivacyEs() {
+  return (
+    <>
 
       <article className="legal-body">
         <h1>Política de privacidad</h1>
@@ -49,6 +51,7 @@ export default function PrivacidadPage() {
           <li>Dirección de correo electrónico.</li>
           <li>Tipo de conversación que nos propones (proyecto, colaboración o idea).</li>
           <li>El contenido de tu mensaje.</li>
+          <li>El idioma en el que estás viendo la web, para responderte en ese idioma.</li>
         </ul>
         <p>
           Si nos escribes directamente por correo electrónico o nos llamas, trataremos igualmente los
@@ -140,6 +143,13 @@ export default function PrivacidadPage() {
 
         <h2>Cookies</h2>
         <p>Este sitio web no utiliza cookies ni tecnologías similares de análisis, publicidad o seguimiento.</p>
+        <p>
+          Si cambias el idioma de la web, guardamos esa elección en el almacenamiento local de tu
+          navegador (<em>localStorage</em>) para mostrarte el mismo idioma en tus próximas visitas y,
+          durante unos instantes, la posición de la página para devolverte al mismo punto. Es una
+          preferencia que eliges tú, no identifica a nadie, no se envía a nuestros servidores ni a
+          terceros y puedes borrarla en cualquier momento desde la configuración de tu navegador.
+        </p>
 
         <h2>Tus derechos</h2>
         <p>
@@ -175,9 +185,9 @@ export default function PrivacidadPage() {
         </p>
 
         <p className="legal-crosslink">
-          Consulta también nuestro <a href="/aviso-legal">aviso legal</a>.
+          Consulta también nuestro <a href={href("legal", "es")}>aviso legal</a>.
         </p>
       </article>
-    </main>
+    </>
   );
 }
