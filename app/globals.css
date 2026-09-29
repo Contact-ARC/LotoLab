@@ -2940,7 +2940,36 @@ button { font: inherit; }
 .legal-footer nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
 .legal-footer a:hover { opacity: 0.6; }
 .legal-footer a:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
-.legal-footer span { opacity: 0.6; }
+.legal-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+}
+.legal-footer-copy { opacity: 0.6; }
+
+/* "Web por ARC" credit: quiet by default, full strength on hover */
+.legal-footer .arc-credit {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  opacity: 0.6;
+  transition: opacity 180ms ease;
+}
+.legal-footer .arc-credit:hover,
+.legal-footer .arc-credit:focus-visible { opacity: 1; }
+/* Logo lock-up: the mark is ~2× the capital height, the text sits centred on it
+   (slightly more mark above than below) and the arc tip almost touches "ARC". */
+.arc-credit-mark {
+  width: auto;
+  height: 1.34em;
+  position: relative;
+  top: 0.23em;
+  margin-left: 0.45em;
+  transition: transform 220ms ease;
+}
+.arc-credit:hover .arc-credit-mark { transform: translateY(-1px); }
+.arc-credit-name { letter-spacing: 0.2em; }
 
 /* Contact page is red: continue it into the footer */
 .contact-page ~ .legal-footer {
