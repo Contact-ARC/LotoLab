@@ -454,8 +454,8 @@ function ScaleStory({ onOpenProject }: { onOpenProject: (project: ProjectKey) =>
 
       paths = measured.map(({ element, length }, index) => {
         element.style.fill = "none";
-        element.style.stroke = "#33302b";
-        element.style.strokeWidth = "2.6";
+        element.style.stroke = "#3d3a35";
+        element.style.strokeWidth = "1.2";
         element.style.strokeLinecap = "round";
         element.style.strokeLinejoin = "round";
         element.style.strokeDasharray = String(length);
